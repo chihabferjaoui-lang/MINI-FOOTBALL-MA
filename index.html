@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>5v5 Mini Foot Tactics</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">⚽</span><div><strong>Mini Foot Tactics</strong><small>5v5 lobby + strategy board</small></div></div>
+    <button id="shareBtn" class="btn ghost">Copy Lobby Link</button>
+  </header>
+  <main class="app">
+    <section class="panel lobby">
+      <div class="panel-head"><h2>Pregame Lobby</h2><span class="badge">Waiting room</span></div>
+      <label>Lobby name<input id="lobbyName" value="Friday 5v5" /></label>
+      <div class="teams">
+        <div><h3>Red Team</h3><div id="redList" class="player-list"></div></div>
+        <div><h3>Blue Team</h3><div id="blueList" class="player-list"></div></div>
+      </div>
+      <div class="add-player">
+        <input id="playerName" placeholder="Player name" />
+        <select id="teamSelect"><option value="red">Red</option><option value="blue">Blue</option></select>
+        <button id="addPlayer" class="btn">Add</button>
+      </div>
+      <div class="voice-card">
+        <h3>Voice Chat</h3>
+        <p id="voiceStatus">Mic is off. For real team voice, paste a Discord/Meet link below.</p>
+        <div class="voice-actions">
+          <button id="micBtn" class="btn ghost">Start Mic</button>
+          <button id="muteBtn" class="btn ghost" disabled>Mute</button>
+        </div>
+        <div class="voice-link-row">
+          <input id="voiceLink" placeholder="Discord / Meet voice link" />
+          <button id="joinVoice" class="btn">Join</button>
+        </div>
+      </div>
+      <div class="chat">
+        <h3>Lobby Chat</h3>
+        <div id="messages" class="messages"></div>
+        <div class="chat-input"><input id="chatText" placeholder="Type a message..." /><button id="sendChat" class="btn">Send</button></div>
+      </div>
+    </section>
+    <section class="pitch-card">
+      <div class="toolbar">
+        <div><h1>5v5 Tactic Board</h1><p>Drag players and ball. Draw arrows, erase one line at a time, or use Marquage for double-team marking.</p></div>
+        <div class="controls">
+          <select id="formationSelect">
+            <option value="box">Box</option>
+            <option value="diamond">Diamond</option>
+            <option value="defensive">Defensive</option>
+            <option value="attacking">Attacking</option>
+          </select>
+          <button id="selectTool" class="btn ghost active-tool">Move</button>
+          <button id="lineTool" class="btn ghost">Line</button>
+          <button id="arrowTool" class="btn ghost">Arrow</button>
+          <button id="eraserTool" class="btn ghost">Eraser</button>
+          <button id="marquageTool" class="btn ghost">Marquage</button>
+          <button id="clearDrawings" class="btn ghost">Clear drawings</button>
+          <button id="resetBtn" class="btn ghost">Reset</button>
+          <button id="saveBtn" class="btn">Save tactic</button>
+        </div>
+      </div>
+      <div id="toolHint" class="tool-hint">Move mode: drag players and the ball.</div>
+      <div class="sequence-panel">
+        <div class="sequence-head">
+          <div>
+            <h3>Sequence Recorder</h3>
+            <p>Build plays: pass to a player or area, run a player to an area, then shoot.</p>
+          </div>
+          <div class="sequence-actions">
+            <button id="playSequence" class="btn">▶ Play</button>
+            <button id="clearSequence" class="btn ghost">Clear</button>
+          </div>
+        </div>
+        <div class="sequence-builder">
+          <select id="sequenceAction">
+            <option value="pass">Pass</option>
+            <option value="run">Run to area</option>
+            <option value="shoot">Shoot</option>
+          </select>
+          <select id="sequenceFrom"></select>
+          <select id="targetMode">
+            <option value="player">To player</option>
+            <option value="area">To area</option>
+            <option value="goal">To goal</option>
+          </select>
+          <select id="sequenceTo"></select>
+          <button id="pickArea" class="btn ghost">Pick area</button>
+          <button id="addSequenceStep" class="btn ghost">Add step</button>
+        </div>
+        <div id="areaStatus" class="area-status">No area selected yet.</div>
+        <div id="sequenceList" class="sequence-list"></div>
+      </div>
+      <div id="pitch" class="pitch" aria-label="Football tactics pitch">
+        <svg id="drawingLayer" class="drawing-layer" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <marker id="arrowHead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L8,4 L0,8 Z" class="arrow-head"></path>
+            </marker>
+          </defs>
+        </svg>
+        <div class="half-line"></div><div class="center-circle"></div><div class="center-dot"></div>
+        <div class="box top"></div><div class="goal top"></div><div class="box bottom"></div><div class="goal bottom"></div>
+        <div id="ball" class="ball" title="Drag the ball">⚽</div>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
